@@ -1,0 +1,47 @@
+<mvc:View controllerName="list.zse07hw.controller.list"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    >
+<!--기본값 설정  = > selectedKey-->
+    <Page id="page" title="Title">
+        <content>
+
+            <ComboBox items="{/aSkill}" 
+                      selectionChange="onSelect"
+                      selectedKey="{/seKey}"      
+            >
+                <items>
+                    <core:Item key="{sId}" text="{sName}" />
+                </items>
+            </ComboBox>
+
+        <f:SimpleForm>
+            <List>
+                <items>
+                    <StandardListItem title="S01" description="SAPUI5" />
+                    <StandardListItem title="S02" description="ABAP" />
+                </items>
+            </List>
+            
+            <List items="{/aSkill}">
+                <items>
+                    <StandardListItem title="{sId}" description="{sName}" />
+                </items>
+            </List>
+        </f:SimpleForm>
+
+
+            <f:SimpleForm>
+                <Title text="Test1"/>
+                <Input id="idInput" value ="{/oDep/dName}"/>
+                <Input value ="{/aSkill/0/sName}"/>
+                <Input value = "{myModel>/firstName}"/>
+                <Button text= "Search" press = "onSearch"/>
+            </f:SimpleForm>
+            
+        </content>
+    </Page>
+</mvc:View>

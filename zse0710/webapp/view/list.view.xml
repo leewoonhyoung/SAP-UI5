@@ -1,0 +1,29 @@
+<mvc:View controllerName="std.zse0710.controller.list"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    >
+
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <t:Table rows="{/data}"
+                    id="idTableConn"
+                    rowSelectionChange="onRow"
+                    selectionBehavior="Row"
+                    selectionMode="Single"
+                    visibleRowCount="S">
+
+                    <t:Column>
+                        <t:label><Label text="Airline Id"/></t:label>
+                        <t:template><Text text="{carrier/carrId}"/></t:template>
+                    </t:Column>
+                    <t:Column>
+                        <t:label><Label text="Airline Name"/></t:label>
+                        <t:template><Text text="{carrier/carrName}"/></t:template>
+                    </t:Column>
+
+            </t:Table>
+
+        </content>
+    </Page>
+</mvc:View>

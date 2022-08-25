@@ -1,0 +1,42 @@
+<mvc:View controllerName="VC.zse0704.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    >
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <l:HorizontalLayout>
+            <Text id="idLastName" text="LEE"></Text>
+            <Text id="idFirstName" text="WH"></Text>
+            <Button text="Click"
+                    id='idClick'
+                press = "onClick">
+            </Button>
+            <CheckBox text="No"
+                      id='idCheck'
+                      selected='true'
+                      select="onSelect">
+            </CheckBox>
+            </l:HorizontalLayout>
+
+          <!--  Js View -->
+            <mvc:JSView viewName="VC.zse0704.view.jsview"
+                        id="jsview" />
+
+            <Label text="Team Name" labelFor="I1" /> 
+            <Input id="I1" value="Need Data" description="Enter DATA"/>
+
+            <Button text="Search"
+                    id='idSearch'
+                    press = "onSearch"/>    
+     
+
+            <Label text="My Team">
+                <layoutData>
+                    <l:GridData span="L12 M12 S12"/>
+                </layoutData>
+            </Label>
+
+        </content>
+    </Page>
+</mvc:View>

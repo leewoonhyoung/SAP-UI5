@@ -1,0 +1,25 @@
+<mvc:View controllerName="lt.zse0711.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Input id="idVenca" value="" />
+            <Button text="Search" press="onSearch" />
+            <Table id="idTableVen" items="{/esVenSet}"/>
+                <columns>
+                    <Colunm><header><Text text="Vender Id" /></header></Colunm>
+                    <Colunm><header><Text text="Vendor Name" /></header></Colunm>
+                </columns>
+
+                <items>
+                    <ColunmListItem>
+                        <cells>
+                            <Text text="{Lifnr}" />
+                            <Text text="{Name1}"/>
+                        </cells>
+                    </ColunmListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

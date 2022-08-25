@@ -1,0 +1,30 @@
+<mvc:View controllerName="Train.zse0706.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    >
+
+    <Page id="page" title="{i18n>title}">
+    <content>
+
+        <Label text = "Main View"/>
+        <Input id="inpMain" value="lee"/>
+        <Button text="Main Button" press="onMain"></Button>
+
+     <!-- Fragment -->
+        <core:Fragment
+            id="idFragView"
+            fragmentName="Train.zse0706.view.Frag"
+        />
+        <!-- PopUp -->
+        <Button text="POPUP Button" press="onPopup"></Button>
+
+        <!-- data binding -->
+        <!-- <Text onInit {/lastname}/> -->
+
+
+
+
+    </content>
+    </Page>
+</mvc:View>

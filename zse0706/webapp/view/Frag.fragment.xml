@@ -1,0 +1,11 @@
+<core:FragmentDefinition
+    xmlns= "sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+>
+
+    <Label text="Fragment"/>
+    <Input id="inpFrag" value="WH"/>
+    <Button text="Frag Button" press="onFrag"/>
+    
+</core:FragmentDefinition>    

@@ -1,0 +1,49 @@
+<mvc:View controllerName="s09.zse0709.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+>
+<Page id="page" title="{i18n>title}">
+    <content>
+        <Table items="{/aEmp}">
+            <!-- Header -->
+            <columns>
+                <Column><header><Text text="Employee Number" /></header></Column>
+                <Column><header><Text text="Employee Name" /></header></Column>
+            </columns>
+
+            <!-- Item -->
+            <items>
+                <ColumnListItem press="onColumn" type="Active">
+                    <cells>
+                        <Text text = "{eNo}" />
+                        <Text text = "{eName}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+
+        <Table id="idSkillTable" items="{/aSkill}">
+
+            <!-- Header -->
+            <columns>
+                <Column><header><Text text="Skill ID" /></header></Column>
+                <Column><header><Text text="Skill Name"   /></header></Column>
+                <Column><header><Text text="Skill No"    /></header></Column>
+            </columns>
+
+            <!-- Item -->
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text = "{sId}" />
+                        <Text text = "{sName}" />
+                        <Text text = "{eNo}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+
+        </Table>
+
+    </content>
+</Page>
+</mvc:View>
