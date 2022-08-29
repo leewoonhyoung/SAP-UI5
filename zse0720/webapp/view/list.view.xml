@@ -1,0 +1,39 @@
+<mvc:View controllerName="pj.zse0720.controller.list"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    >
+
+    <Page id="page" title="{i18n>title}">
+    <content>
+        <Input id="idMember1" text="1" />
+        <Input id="idMember2" text="2" />
+        <Button text="Search" press="onSearch" />
+        <Table id="idTableMem" items="{/MEMBERSet}">
+
+        <!-- condition -->
+        <columns>
+            <Column><header><Text text = "MEMID" /></header></Column>
+            <Column><header><Text text = "MNAME" /></header></Column>
+            <Column><header><Text text = "GBDAT" /></header></Column>
+            <Column><header><Text text = "DATJO" /></header></Column>
+            <Column><header><Text text = "LAND1" /></header></Column>
+            <Column><header><Text text = "GENDER" /></header></Column>
+        </columns>
+
+        <!-- data -->
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{MemId}" />
+                        <Text text="{Mname}"/>
+                        <Text text="{Gbdat}"/>
+                        <Text text="{Datjo}"/>
+                        <Text text="{Land1}"/>
+                        <Text text="{Gender}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </content>
+    </Page>
+</mvc:View>

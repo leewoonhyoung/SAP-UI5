@@ -1,0 +1,58 @@
+<mvc:View controllerName="test.test1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns:t="sap.ui.table"
+	xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+	xmlns="sap.m"
+    >
+    <Page id="page" title="{oModel>/title}">
+        <content>
+            <!-- Context Binding -->
+            <Input binding="{oModel>/datas2}" value="{oModel>name}"/>
+            
+            <!-- Aggresgation Binding -->
+            <t:Table
+				rows="{
+                    path: 'oModel>/datas',
+                    filters: [
+                        {path: 'name', operator: 'EQ', value: 'woon'}
+                    ]
+                }" 
+				selectionMode="MultiToggle"
+				visibleRowCount="7"
+				paste="onPaste"
+				ariaLabelledBy="title">
+
+				<t:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="title" text="Products"/>
+					</OverflowToolbar>                   
+				</t:extension>
+
+				<t:columns>
+					<t:Column width="11rem">
+						<Label text="{oModel>name}" />
+						<t:template>
+							<Text text="{oModel>name}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+                    <t:Column width="11rem">
+						<Label text="{oModel>age}" />
+						<t:template>
+							<Text text="{oModel>age}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+                    <t:Column width="11rem">
+						<Label text="{oModel>home}" />
+						<t:template>
+							<Text text="{oModel>home}" wrapping="false" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+
+			</t:Table>
+        </content>
+    </Page>
+</mvc:View>
