@@ -4,19 +4,24 @@
 	xmlns:u="sap.ui.unified"
 	xmlns:c="sap.ui.core"
 	xmlns="sap.m"
+    xmlns:viz="sap.viz.ui5.controls" 
+    xmlns:layout="sap.ui.layout"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data" height="100%"
     >
+
     <Page id="page" title="{oModel>/title}">
         <content>
             <!-- Context Binding -->
-            <Input binding="{oModel>/datas2}" value="{oModel>name}"/>
+            <Input  id="InputId"
+                    binding="{oModel>/datas2}" value="{oModel>name}"
+                    submit="OnInputSubmit"/>
             
             <!-- Aggresgation Binding -->
             <t:Table
+                id = "Table1"
 				rows="{
-                    path: 'oModel>/datas',
-                    filters: [
-                        {path: 'name', operator: 'EQ', value: 'woon'}
-                    ]
+                    path : 'oModel>/datas'
                 }" 
 				selectionMode="MultiToggle"
 				visibleRowCount="7"
@@ -50,9 +55,44 @@
 							<Text text="{oModel>home}" wrapping="false" />
 						</t:template>
 					</t:Column>
+
+                    <t:Column width="11rem">
+						<Label text="{oModel>price}" />
+						<t:template>
+							<Text text="{oModel>price}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
 				</t:columns>
 
 			</t:Table>
+
+            <viz:VizFrame id="idLineChart" uiConfig="{applicationSet:'fiori'}"
+                height='100%' width="100%" vizType='bar'>
+                <viz:dataset>
+                    <viz.data:FlattenedDataset data="{oModel>/datas}">
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition 
+                                name="Name"
+                                value="{oModel>name}" />
+                        </viz.data:dimensions>
+
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition 
+                                name="Age"
+                                value="{oModel>age}" />
+                        </viz.data:measures>
+
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+
+                <viz:feeds>
+                    <viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure"
+                        values="Age" />
+                    <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
+                        values="Name" />
+                </viz:feeds>
+            </viz:VizFrame>
         </content>
     </Page>
 </mvc:View>

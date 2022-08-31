@@ -1,0 +1,275 @@
+<!-- <content> -->
+    <!-- <Toolbar> -->
+        <!-- <Title text="툴바"/> -->
+        <!-- <ToolbarSpacer/> -->
+        <!-- <SearchField width="50%" search=".onFilterInvoices"/> -->
+    <!-- </Toolbar> -->
+    <!--  -->
+    <!-- <ComboBox items="{/ES_SYEARSet}"> -->
+        <!-- <core:Item key="{Syear}" text="{Syear}" /> -->
+    <!-- </ComboBox> -->
+<!--  -->
+    <!-- <Table id = "idTableVen" items="{/ES_SYEARSet}"> -->
+        <!-- <columns> -->
+            <!-- <Column><header><Text text = "Vendor Id"/></header></Column> -->
+        <!-- </columns> -->
+        <!-- <items> -->
+            <!-- <ColumnListItem> -->
+                <!-- <cells> -->
+                    <!-- <Text text = "{Syear}" /> -->
+                <!-- </cells> -->
+            <!-- </ColumnListItem> -->
+        <!-- </items> -->
+    <!-- </Table> -->
+
+
+    <columns>
+        <Column><header><Text text = "년도"/></header></Column>
+        <Column><header><Text text = "항공사"/></header></Column>
+        <Column><header><Text text = "항공사명"/></header></Column>
+        <Column><header><Text text = "예약 건수"/></header></Column>
+        <Column><header><Text text = "매출액"/></header></Column>
+        <Column><header><Text text = "취소 건수"/></header></Column>
+    </columns>
+
+    <items>
+        <ColumnListItem>
+            <cells>
+                <Text text = "{Syear}" />
+                <Text text = "{Carrid}" />
+                <Text text = "{Carrname}" />
+                <Text text = "TODO" />
+                <Text text = "{Curam}" />
+                <Text text = "TODO" />
+            </cells>
+        </ColumnListItem>
+    </items>
+
+
+
+    <Table
+    inset="false"
+    items="{/ES_SYEARSet}">
+    <headerToolbar>
+        <Toolbar>
+        <Label text="항공사 연도별 매출"></Label>
+        </Toolbar>
+    </headerToolbar>
+    
+    <columns>
+        <Column width="12em">
+            <Label text="년도" />
+        </Column>
+
+        <Column width="12em">
+            <Label text="항공사" />
+        </Column>
+
+        <Column width="12em">
+            <Label text="ID" />
+        </Column>
+    </columns>
+
+    <items>
+        <ColumnListItem>
+            <cells>
+                <ObjectIdentifier text="{Syear}" />
+                <ObjectIdentifier text="{Carrid}" />
+            </cells>
+        </ColumnListItem>
+    </items>
+
+</Table>
+
+
+<OverflowToolbar>
+    <ComboBox change="onChange" selectionChange="onChange" id="oComboBox"
+     items="{ path: '/ES_SYEARSet'}">
+        <core:Item text="{Syear}" />
+    </ComboBox>
+
+    <Button	text="Filter" press="onSearch" icon="sap-icon://filter"/>
+    <Button	text="Reset" press="onReset" type="Transparent"/>
+    <ToolbarSpacer/>
+
+    <SegmentedButton enabled="false">
+        <Button icon="sap-icon://settings" />
+        <Button icon="sap-icon://settings" />
+        <Button icon="sap-icon://settings" />
+    </SegmentedButton>
+
+</OverflowToolbar>
+
+<l:VerticalLayout id="tableLayout"/>
+
+    <Table items="{/ES_SYEARSet}">
+        <columns>
+            <Column><header><Text text = "년도"/></header></Column>
+            <Column><header><Text text = "항공사"/></header></Column>
+            <Column><header><Text text = "항공사명"/></header></Column>
+            <Column><header><Text text = "예약 건수"/></header></Column>
+            <Column><header><Text text = "매출액"/></header></Column>
+            <Column><header><Text text = "취소 건수"/></header></Column>
+        </columns>
+    
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text = "{/Syear}" />
+                    <Text text = "{/Carrid}" />
+                    <Text text = "{/Carrname}" />
+                    <Text text = "TODO" />
+                    <Text text = "{/Curam}" />
+                    <Text text = "TODO" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+    <l:FixFlex id='chartFixFlex' minFlexSize="250">
+    <!--Below is the setting panel -->
+    <l:flexContent>
+        <viz:Popover id="idPopOver"></viz:Popover>
+        <viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}"
+            height='100%' width="100%" vizType='bar'>
+            <viz:dataset>
+                <viz.data:FlattenedDataset data="{/ES_SYEARSet}">
+                    <viz.data:dimensions>
+                        <viz.data:DimensionDefinition name="Store Name"
+                            value="{Store Name}" />
+                    </viz.data:dimensions>
+
+                    <viz.data:measures>
+                        <viz.data:MeasureDefinition name="Revenue"
+                            value="{Revenue}" />
+                        <viz.data:MeasureDefinition name="Cost"
+                            value="{Cost}" />
+                    </viz.data:measures>
+                    
+                </viz.data:FlattenedDataset>
+            </viz:dataset>
+
+            <viz:feeds>
+                <viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure"
+                    values="Revenue" />
+                <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
+                    values="Store Name" />
+            </viz:feeds>
+        </viz:VizFrame>
+    </l:flexContent>
+</l:FixFlex>
+</Page>
+
+<VBox fitContainer="true">
+    <smartchart:SmartChart enableAutoBinding="true"
+        entitySet="ProductCollection" useVariantManagement="true"
+        persistencyKey="PKeyChartExample9" useChartPersonalisation="true"
+        header="" showFullScreenButton="true" selectionMode="Multi"
+        showChartTooltip="true" showDrillBreadcrumbs="false"
+        showDetailsButton="false" showDrillButtons="true"
+        showSemanticNavigationButton="true">
+        <smartchart:semanticObjectController>
+            <sl:SemanticObjectController
+                navigationTargetsObtained="onNavigationTargetsObtained" navigate="onNavigate"/>
+        </smartchart:semanticObjectController>
+    </smartchart:SmartChart>
+</VBox>
+
+
+
+
+
+
+<!-- 2022-08-31 -->
+<content>
+    <ComboBox id="idCombo"
+                items="{/ES_SYEARSet}"
+                selectionChange="onClick"
+                >
+        <items>
+            <core:Item key="{Syear}" text="{Syear}"/>
+        </items>
+    </ComboBox>
+
+    <Table id= "idTable" 
+           items="{/ES_SYEARSet}"
+           >
+        <columns>
+            <Column><header><Text text = "연월"/></header></Column>
+            <Column><header><Text text = "항공사"/></header></Column>
+            <Column><header><Text text = "항공사명"/></header></Column>
+            <Column><header><Text text = "예약 건수"/></header></Column>
+            <Column><header><Text text = "매출액"/></header></Column>
+            <Column><header><Text text = "취소 건수"/></header></Column>
+        </columns>
+
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{Syear}"/>
+                    <Text text="{Carrid}"/>
+                    <Text text="{Carrname}"/>
+                    <Text text="{Bkcnt}"/>
+                    <Text text="{Curam}"/>
+                    <Text text="{Cacnt}"/>
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+    
+    <!-- 도넛 차트 -->
+    <Text text="{click된 항공사} 년도별 매출액" class="sapUiSmallMargin">
+        <layoutData>
+            <l:GridData span="XL12 L12 M12 S12"/>
+        </layoutData>
+    </Text>
+        <FlexBox width="22rem" height="13rem" alignItems="Start" justifyContent="SpaceBetween">
+        <items>
+            <mc:InteractiveDonutChart selectionChanged="onSelectionChanged" displayedSegments="2" press="press">
+                <mc:segments>
+                    <mc:InteractiveDonutChartSegment label="{Syear/0}" value="32" displayedValue="{Curam}"/>
+                    <mc:InteractiveDonutChartSegment label="{Syear/1}" value="28" displayedValue="28%"/>
+                </mc:segments>
+            </mc:InteractiveDonutChart>
+        </items>
+        </FlexBox>
+
+        <!-- 스택차트 -->
+        <l:FixFlex id='chartFixFlex' minFlexSize="250">
+            <l:flexContent>
+                <viz:Popover id="idPopOver"></viz:Popover>
+                <viz:VizFrame   id="idVizFrame" 
+                                uiConfig="{applicationSet:'fiori'}"
+                                height='100%'
+                                width="100%"
+                                vizType='stacked_column'>
+                    <viz:dataset>
+                        <viz.data:FlattenedDataset data="{/milk}">
+                            <viz.data:dimensions>
+                                <viz.data:DimensionDefinition 
+                                    name="Week"
+                                    value="{Week}" />
+                            </viz.data:dimensions>
+                            <viz.data:measures>
+                                <viz.data:MeasureDefinition 
+                                    name="Cost1"
+                                    value="{Cost1}" />
+                                <viz.data:MeasureDefinition 
+                                    name="Cost2"
+                                    value="{Cost2}" />
+                                <viz.data:MeasureDefinition 
+                                    name="Cost3"
+                                    value="{Cost3}" />
+                            </viz.data:measures>
+                        </viz.data:FlattenedDataset>
+                    </viz:dataset>
+                    <viz:feeds>
+                        <viz.feeds:FeedItem uid="valueAxis" type="Measure"
+                            values="Cost2,Cost1" />
+                        <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
+                            values="Week" />
+                    </viz:feeds>
+                </viz:VizFrame>
+            </l:flexContent>
+        </l:FixFlex>
+</content>

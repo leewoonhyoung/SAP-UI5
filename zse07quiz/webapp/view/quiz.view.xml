@@ -1,0 +1,119 @@
+<mvc:View
+	height="100%"
+	controllerName="quiz.zse07quiz.controller.quiz"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:mc="sap.suite.ui.microchart"
+	xmlns="sap.m"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data"
+    >
+    <Title text="연도별 항공사 매출"/>
+    <OverflowToolbar>
+		<ComboBox change="onChange" selectionChange="onChange" id="oComboBox"
+		 items="{/ES_SYEARSet}">
+			<core:Item text="{Syear}" />
+		</ComboBox>
+		<Button	text="조건" press="onSearch" icon="sap-icon://filter"/>
+		<ToolbarSpacer/>
+	</OverflowToolbar>
+
+    <l:VerticalLayout id="tableLayout"/>
+     <Table id= "idTable" 
+               items="{/ES_SYEARSet}"
+               >
+            <columns>
+                <Column><header><Text text = "연월"/></header></Column>
+                <Column><header><Text text = "항공사"/></header></Column>
+                <Column><header><Text text = "항공사명"/></header></Column>
+                <Column><header><Text text = "예약 건수"/></header></Column>
+                <Column><header><Text text = "매출액"/></header></Column>
+                <Column><header><Text text = "취소 건수"/></header></Column>
+            </columns>
+    
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{Syear}"/>
+                        <Text text="{Carrid}"/>
+                        <Text text="{Carrname}"/>
+                        <Text text="{Bkcnt}"/>
+                        <Text text="{Curam}"/>
+                        <Text text="{Cacnt}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+	<Page showHeader="false" class="sapUiContentPadding">
+
+    <content>
+        <ComboBox id="idCombo"
+                    items="{/ES_SYEARSet}"
+                    selectionChange="onClick"
+                    >
+            <items>
+                <core:Item key="{Syear}" text="{Syear}"/>
+            </items>
+        </ComboBox>
+        
+        <!-- 도넛 차트 -->
+        <Text text="{click된 항공사} 년도별 매출액" class="sapUiSmallMargin">
+            <layoutData>
+                <l:GridData span="XL12 L12 M12 S12"/>
+            </layoutData>
+        </Text>
+            <FlexBox width="22rem" height="13rem" alignItems="Start" justifyContent="SpaceBetween">
+            <items items="{/ES_SYEARSet}">
+                <mc:InteractiveDonutChart selectionChanged="onSelectionChanged" displayedSegments="2" press="press">
+                    <mc:segments>
+                        <mc:InteractiveDonutChartSegment label="{Syear/0}" value="32" displayedValue="{Curam}"/>
+                        <mc:InteractiveDonutChartSegment label="{Syear/1}" value="28" displayedValue="28%"/>
+                    </mc:segments>
+                </mc:InteractiveDonutChart>
+            </items>
+            </FlexBox>
+    
+            <!-- 스택차트 -->
+            <l:FixFlex id='chartFixFlex' minFlexSize="250" items="{/ES_SYEARSet}">
+                <l:flexContent>
+                    <viz:Popover id="idPopOver"></viz:Popover>
+                    <viz:VizFrame   id="idVizFrame" 
+                                    uiConfig="{applicationSet:'fiori'}"
+                                    height='100%'
+                                    width="100%"
+                                    vizType='stacked_column'>
+                        <viz:dataset>
+                            <viz.data:FlattenedDataset data="{/milk}">
+                                <viz.data:dimensions>
+                                    <viz.data:DimensionDefinition 
+                                        name="Week"
+                                        value="{Week}" />
+                                </viz.data:dimensions>
+                                <viz.data:measures>
+                                    <viz.data:MeasureDefinition 
+                                        name="Cost1"
+                                        value="{Cost1}" />
+                                    <viz.data:MeasureDefinition 
+                                        name="Cost2"
+                                        value="{Cost2}" />
+                                    <viz.data:MeasureDefinition 
+                                        name="Cost3"
+                                        value="{Cost3}" />
+                                </viz.data:measures>
+                            </viz.data:FlattenedDataset>
+                        </viz:dataset>
+                        <viz:feeds>
+                            <viz.feeds:FeedItem uid="valueAxis" type="Measure"
+                                values="Cost2,Cost1" />
+                            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
+                                values="Week" />
+                        </viz:feeds>
+                    </viz:VizFrame>
+                </l:flexContent>
+            </l:FixFlex>
+    </content>
+</Page>
+</mvc:View>
+

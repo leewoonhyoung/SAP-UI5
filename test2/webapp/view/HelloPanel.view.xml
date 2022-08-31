@@ -1,0 +1,23 @@
+<mvc:View controllerName="test2.test2.controller.View1.HelloPanel"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Panel headerText="Panel Title"
+        class="sapUiResponsiveMargin"
+        width="auto">
+    <content>
+        <Button 
+            text="Button" 
+            press=".onShowHello"
+            class="myCustomButton"/>
+
+        <Input  value="{/recipient/name}"
+            description="Hello {/recipient/name}"
+            valueLiveUpdate="true"
+            width="60%"/>
+            
+        <FormattedText 
+            htmlText="Hello {/recipient/name}"
+            class="sapUiSmallMargin sapThemeHighlight-asColor myCustomText"/>      
+    </content>
+</Panel>
+</mvc:View> 
