@@ -10,15 +10,16 @@ sap.ui.define([
 var TableController = Controller.extend("quiz.zse07quiz.controller.view1", {
 
     onInit: function() {
-        Component.create({
-            name : 'quiz.zse07quiz.Table'
-        })
-        .then(function(oComp) {
-            var oModel = new JSONModel("{/ZGSSWETI_SRV.ES_SALES}");
-            this.getView().setModel(oModel);
-            oComp.setModel(this.getView().getModel());
-            let oTable = oComp.getTable();
-        }.bind(this));
+        // Component.create({
+        //     name : 'quiz.zse07quiz.Table'
+        // })
+        // .then(function(oComp) {
+        //     debugger;
+        //     var oModel = this.getOwnerComponent().getModel();
+        //     this.getView().setModel(oModel);
+        //     oComp.setModel(this.getView().getModel());
+        //     let oTable = oComp.getTable();
+        // }.bind(this));
     },
 
     onChange: function(oEvent) {
@@ -30,8 +31,8 @@ var TableController = Controller.extend("quiz.zse07quiz.controller.view1", {
     },
     onSearch: function(oEvent) {
         var comboBoxValue = this.byId("oComboBox").getValue();
-        var oBinding = this.getTable().byId("idTable").getBinding("items");
-        var oFilter = new Filter( oBinding , "EQ", comboBoxValue);
+        var oBinding = this.byId("idTable").getBinding("items");
+        var oFilter = new Filter( "Syear" , "EQ", comboBoxValue);
             oBinding.filter([oFilter]);
         
     }

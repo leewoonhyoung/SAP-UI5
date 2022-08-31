@@ -22,7 +22,7 @@
 
     <l:VerticalLayout id="tableLayout"/>
      <Table id= "idTable" 
-               items="{/ES_SYEARSet}"
+               items="{/ES_SALESSet}"
                >
             <columns>
                 <Column><header><Text text = "연월"/></header></Column>
